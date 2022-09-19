@@ -1,0 +1,141 @@
+---
+title: "Typical_Employee_Survey_Data_HW2_MuskanChowatia"
+author: "mc2611@rutgers.edu"
+date: "2022-09-18"
+output: html_document
+---
+```{r}
+#Importing Dataset
+
+
+
+library(readxl)
+TypicalEmployeeSurveyData <- read_excel("C:/Users/muska/Assignments/BusinessForecasting/Week2/TypicalEmployeeSurveyData.xlsx")
+View(TypicalEmployeeSurveyData)
+
+
+
+#Explore Data Frame
+names(TypicalEmployeeSurveyData)
+nrow(TypicalEmployeeSurveyData)
+dim(TypicalEmployeeSurveyData)
+head(TypicalEmployeeSurveyData)
+tail(TypicalEmployeeSurveyData)
+str(TypicalEmployeeSurveyData)
+as.integer(TypicalEmployeeSurveyData$Gender)
+str(TypicalEmployeeSurveyData)
+class(TypicalEmployeeSurveyData$Gender)
+TypicalEmployeeSurveyData$Gender <- as.factor(TypicalEmployeeSurveyData$Gender)
+class(TypicalEmployeeSurveyData$Gender)
+str(TypicalEmployeeSurveyData)
+
+#Exploring Columns
+
+TypicalEmployeeSurveyData$Longevity
+TypicalEmployeeSurveyData[10]
+TypicalEmployeeSurveyData[c("Emotion")]
+TypicalEmployeeSurveyData[3:9]
+TypicalEmployeeSurveyData[c("Job_Satisfaction", "Budget_Participation")]
+
+#Exploring Rows
+
+TypicalEmployeeSurveyData[2,4]
+
+# Combined
+TypicalEmployeeSurveyData[3:5,c("Budget_Participation")]
+TypicalEmployeeSurveyData[3:6,7:10]
+
+#Levels
+
+table(TypicalEmployeeSurveyData$Job_Characteristics)
+table(TypicalEmployeeSurveyData$Gender, TypicalEmployeeSurveyData$Longevity)
+
+#Filtering
+
+TypicalEmployeeSurveyData[TypicalEmployeeSurveyData$Gender=="1",]
+
+#Ordering
+
+TypicalEmployeeSurveyData[order(TypicalEmployeeSurveyData$Age),]
+TypicalEmployeeSurveyData[order(-TypicalEmployeeSurveyData$Age),]
+
+
+#Changing column name
+
+names(TypicalEmployeeSurveyData)[3]<-"JobSatisfaction"
+head(TypicalEmployeeSurveyData)
+
+#Changing Job_Characteristics for Row 5
+
+TypicalEmployeeSurveyData[5,4] <- 5
+head(TypicalEmployeeSurveyData)
+TypicalEmployeeSurveyData[1] <- 40
+head(TypicalEmployeeSurveyData)
+
+#Graphing
+barplot(TypicalEmployeeSurveyData$Longevity)
+barplot(TypicalEmployeeSurveyData$Longevity, main = "Longevity depending on Emotion", xlab = "Emotion", ylab = "Longevity", col = "Grey", names.arg= TypicalEmployeeSurveyData$Emotion)
+stem(TypicalEmployeeSurveyData$Longevity)
+hist(TypicalEmployeeSurveyData$Longevity, main = "Longevity of Employee", xlab = "Longevity", col = "blue")
+boxplot(TypicalEmployeeSurveyData$Emotion, col="blue")
+boxplot(TypicalEmployeeSurveyData$Age,TypicalEmployeeSurveyData$Emotion)
+
+## Summary of Statistics
+
+min(TypicalEmployeeSurveyData$Longevity)
+max(TypicalEmployeeSurveyData$Longevity)
+range(TypicalEmployeeSurveyData$Longevity)
+StatRange = max(TypicalEmployeeSurveyData$Longevity) - min(TypicalEmployeeSurveyData$Longevity)
+StatRange
+mean(TypicalEmployeeSurveyData$Longevity)
+sd(TypicalEmployeeSurveyData$Longevity)
+var(TypicalEmployeeSurveyData$Longevity)
+sqrt(TypicalEmployeeSurveyData$Longevity)
+fivenum(TypicalEmployeeSurveyData$Longevity)
+IQR(TypicalEmployeeSurveyData$Longevity)
+quantile(TypicalEmployeeSurveyData$Longevity)
+summary(TypicalEmployeeSurveyData$Longevity)
+boxplot.stats(TypicalEmployeeSurveyData$Longevity)
+boxplot.stats(TypicalEmployeeSurveyData$Longevity)$out
+
+# Summary of DataFrame
+
+summary(TypicalEmployeeSurveyData)
+
+by(TypicalEmployeeSurveyData$Longevity,TypicalEmployeeSurveyData$Emotion,mean)
+by(TypicalEmployeeSurveyData$Longevity,TypicalEmployeeSurveyData$Emotion,sd)
+by(TypicalEmployeeSurveyData$Longevity,TypicalEmployeeSurveyData$Emotion,summary)
+
+aggregate(TypicalEmployeeSurveyData$Longevity,list("Type" = TypicalEmployeeSurveyData$Emotion),median)
+aggregate(TypicalEmployeeSurveyData$Longevity,list("Type" = TypicalEmployeeSurveyData$Emotion),summary)
+
+
+
+
+
+
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
